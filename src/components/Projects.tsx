@@ -6,38 +6,38 @@ import { Badge } from "@/components/ui/badge";
 const projects = [
   {
     name: "FMAE WebApp",
-    description: "A modern web application showcasing advanced frontend techniques and responsive design.",
+    description: "A Web application used as an Competition Tracker and administration application.",
     tech: ["React", "Tailwind CSS", "JavaScript"],
     liveUrl: "https://fmae-webapp.netlify.app",
-    codeUrl: "#"
+    codeUrl: "https://github.com/Durgeshnunna9/nitro-compete-hub.git"
   },
   {
     name: "Sansan Group",
-    description: "Professional business website with smooth animations and elegant UI/UX.",
-    tech: ["React", "CSS3", "Vite"],
+    description: "A Professional web-based data logging and process management application.",
+    tech: ["React", "Tailwind CSS", "JavaScript"],
     liveUrl: "https://sansangroup.netlify.app",
-    codeUrl: "#"
+    codeUrl: "https://github.com/Durgeshnunna9/pharma-planner.git"
   },
   {
     name: "MagFlip",
     description: "Interactive magazine-style application with flip animations and dynamic content.",
     tech: ["React", "Tailwind", "Framer Motion"],
     liveUrl: "https://magflip.netlify.app",
-    codeUrl: "#"
+    codeUrl: "https://github.com/Durgeshnunna9/unbound-pages.git"
   },
   {
     name: "Littone",
-    description: "Clean and minimal portfolio website with focus on typography and spacing.",
+    description: "Clean and minimal magazine website with focus on brand morals and values.",
     tech: ["HTML5", "CSS3", "JavaScript"],
     liveUrl: "https://littone.netlify.app",
-    codeUrl: "#"
+    codeUrl: "https://github.com/Durgeshnunna9/littonemagazine.git"
   },
   {
     name: "PromptAce",
     description: "AI prompt management tool with modern interface and real-time features.",
     tech: ["React", "TypeScript", "Tailwind"],
     liveUrl: "https://promptace.netlify.app",
-    codeUrl: "#"
+    codeUrl: "https://github.com/Durgeshnunna9/prompt-ace-77.git"
   }
 ];
 

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -13,36 +14,65 @@ const Contact = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simple client-side validation
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Missing fields",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState("");
+
+  
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setStatus("");
+
+  try {
+    const sendToYou = await emailjs.send(
+      "service_09f0hwf",   // ← replace with your EmailJS Service ID
+      "template_0bqz2qb",  // ← replace with your EmailJS Template ID
+      
+      {
+        name: formData.name,      // ← from your form data
+        email: formData.email,    // ← from your form data
+        message: formData.message,     // ← from your form data
+      },
+      "Ob5gnnsKx8iB2ZuFZ"     // ← replace with your EmailJS Public Key
+    );
+
+    if (sendToYou.status !== 200) {
+      
     }
 
-    // In a real app, you would send this to EmailJS or a backend
-    toast({
-      title: "Message sent! ✨",
-      description: "Thanks for reaching out. I'll get back to you soon!",
-    });
+    const autoReply = await emailjs.send(
+      "service_09f0hwf",   // ← replace with your EmailJS Service ID
+      "template_pcp59bs",  // ← replace with your EmailJS Template ID
+      {
+        name: formData.name,      // ← from your form data
+        email: formData.email,    // ← from your form data
+      },
+      "Ob5gnnsKx8iB2ZuFZ"     // ← replace with your EmailJS Public Key
+    );
+    if (autoReply.status !== 200) {
+      throw new Error("❌ Failed to send auto-reply. Please try again.");
+    }
 
+    setStatus("✅ Message sent successfully! Auto-reply sent.");
     setFormData({ name: "", email: "", message: "" });
-  };
+
+  } catch (error) {
+    console.error("EmailJS error:", error);
+    setStatus("⚠️ Something went wrong. Try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Animated wave background */}
       <div className="absolute inset-0 opacity-20">
         <svg className="absolute bottom-0 w-full" viewBox="0 0 1440 320">
-          <path 
-            fill="url(#gradient)" 
-            fillOpacity="1" 
+          <path
+            fill="url(#gradient)"
+            fillOpacity="1"
             d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
             className="animate-wave"
           />
@@ -64,41 +94,47 @@ const Contact = () => {
             Have a project in mind? Let's connect and create something extraordinary
           </p>
         </div>
-
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Contact Form */}
           <div className="glass rounded-2xl p-8 animate-fade-in-up">
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Input
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-background/50"
-                />
-              </div>
-              <div>
-                <Input
-                  type="email"
-                  placeholder="your.email@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-background/50"
-                />
-              </div>
-              <div>
-                <Textarea
-                  placeholder="Your message..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-background/50 min-h-[150px]"
-                />
-              </div>
-              <Button type="submit" className="w-full glow-primary">
+              <Input
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="bg-background/50"
+                required
+              />
+              <Input
+                type="email"
+                placeholder="your.email@example.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="bg-background/50"
+                required
+              />
+              <Textarea
+                placeholder="Your message..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="bg-background/50 min-h-[150px]"
+                required
+              />
+              <Button
+                type="submit"
+                className="w-full glow-primary"
+                disabled={isSubmitting}
+              >
                 <Send className="mr-2 h-4 w-4" />
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
+
+            {status && (
+              <p className="text-sm text-center mt-4 text-muted-foreground">
+                {status}
+              </p>
+            )}
           </div>
 
           {/* Contact Info */}
@@ -115,7 +151,7 @@ const Contact = () => {
                     <span className="text-sm">durgesh.nunna.dev@gmail.com</span>
                   </a>
                   <a 
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/durgesh-nunna/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
@@ -124,7 +160,7 @@ const Contact = () => {
                     <span className="text-sm">LinkedIn Profile</span>
                   </a>
                   <a 
-                    href="https://github.com"
+                    href="https://github.com/Durgeshnunna9"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
@@ -137,7 +173,7 @@ const Contact = () => {
 
               <div className="pt-6 border-t border-border/50">
                 <Button className="w-full" variant="outline" asChild>
-                  <a href="/resume.pdf" download>
+                  <a href="/Durgesh_Nunna_Developer.docx" download>
                     Download Resume
                   </a>
                 </Button>

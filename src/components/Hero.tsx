@@ -41,7 +41,7 @@ const Hero = () => {
               className="hover:scale-105 transition-transform"
               asChild
             >
-              <a href="/resume.pdf" download>
+              <a href="/Durgesh_Nunna_Developer.docx" download>
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </a>
