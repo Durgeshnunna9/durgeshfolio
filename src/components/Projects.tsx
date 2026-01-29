@@ -19,25 +19,18 @@ const projects = [
     codeUrl: "https://github.com/Durgeshnunna9/pharma-planner.git"
   },
   {
-    name: "MagFlip",
-    description: "Interactive magazine-style application with flip animations and dynamic content.",
-    tech: ["React", "Tailwind", "Framer Motion"],
-    liveUrl: "https://magflip.netlify.app",
-    codeUrl: "https://github.com/Durgeshnunna9/unbound-pages.git"
-  },
-  {
-    name: "Littone",
+    name: "Littone Magazines",
     description: "Clean and minimal magazine website with focus on brand morals and values.",
     tech: ["HTML5", "CSS3", "JavaScript"],
     liveUrl: "https://littone.netlify.app",
     codeUrl: "https://github.com/Durgeshnunna9/littonemagazine.git"
   },
   {
-    name: "PromptAce",
-    description: "AI prompt management tool with modern interface and real-time features.",
-    tech: ["React", "TypeScript", "Tailwind"],
-    liveUrl: "https://promptace.netlify.app",
-    codeUrl: "https://github.com/Durgeshnunna9/prompt-ace-77.git"
+    name: "Caffique",
+    description: "A Cafe website to showcase its story and have its digital presence",
+    tech: ["HTML", "CSS", "JS"],
+    liveUrl: "https://caffiquecafe.netlify.app/",
+    codeUrl: "https://github.com/Durgeshnunna9/website-1"
   }
 ];
 
