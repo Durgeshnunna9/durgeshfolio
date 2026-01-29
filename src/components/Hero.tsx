@@ -20,7 +20,7 @@ const Hero = () => {
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold">
               <span className="wave inline-block animate-wave">👋</span> Hey, I'm{" "}
-              <span className="text-gradient">Durgesh Nunna</span>
+              <span className="text-gradient">Giri Nunna</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
               Frontend Developer (soon-to-be Full Stack) crafting fast, beautiful web experiences.

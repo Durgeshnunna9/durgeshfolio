@@ -20,7 +20,7 @@ const Navigation = () => {
             onClick={() => scrollToSection('home')}
             className="text-xl font-bold text-gradient hover:scale-105 transition-transform"
           >
-            DN
+            GN
           </button>
           
           <div className="hidden md:flex items-center gap-8">
